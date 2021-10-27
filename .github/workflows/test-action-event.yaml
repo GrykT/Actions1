@@ -13,12 +13,11 @@ jobs:
     - name: start
       run: echo "dispatch src updated event"
     - name: src dispatch event
-      run: |
-        curl --request POST 'https://api.github.com/repos/GrykT/Actions2/dispatches' \
-        --header 'Authorization: Bearer ${{secrets.SRC_SYNC_KEY}}' \
-        --header 'Content-Type: application/json' \
-        --data-raw '{
-          "event_type": "a-src-updated"
-        }'
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.SRC_SYNC_KEY }}
+        repository: GrykT/Actions2
+        event-type: a-src-updated
     - name: end
       run: echo "done"
+      
