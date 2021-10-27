@@ -1,0 +1,24 @@
+name: dispatch src updated
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src'
+jobs:
+  dispatch-target-updated:
+    name: dispatch-alg-src-updated
+    runs-on: ubuntu-latest
+    steps:
+    - name: start
+        run: echo "dispatch src updated event"
+    - name: src dispatch event
+      run: |
+        curl --request POST 'https://api.github.com/repos/GrykT/Actions2/dispatches' \
+        --header 'Authorization: Bearer ${{secrets.SRC_SYNC_KEY}}' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+          "event_type": "a-src-updated"
+        }'
+    - name: end
+      run: echo "done"
