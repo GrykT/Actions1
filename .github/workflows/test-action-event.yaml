@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: start
-        run: echo "dispatch src updated event"
+      run: echo "dispatch src updated event"
     - name: src dispatch event
       run: |
         curl --request POST 'https://api.github.com/repos/GrykT/Actions2/dispatches' \
